@@ -28,7 +28,7 @@
 .NOTES
     ##################################################################
     Author:     Julien Mazoyer
-    Name:       Write-Host
+    Name:       Write-Log
     
     Date        
     10/04/2018      Creation
