@@ -2,108 +2,6 @@ function Get-WUFileByID {
 
     <# MIT License
 
-    Copyright (c) 2017 Kirill Nikolaev
-
-    Permission is hereby granted, free of charge, to any person obtaining a copy
-    of this software and associated documentation files (the "Software"), to deal
-    in the Software without restriction, including without limitation the rights
-    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-    copies of the Software, and to permit persons to whom the Software is
-    furnished to do so, subject to the following conditions:
-
-    The above copyright notice and this permission notice shall be included in all
-    copies or substantial portions of the Software.
-
-    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-    SOFTWARE.
-    #>
-
-    <#
-    .SYNOPSIS
-    Retrieves update files from Microsoft Update Catalog.
-
-    .DESCRIPTION
-    Retrieves update files from Microsoft Update Catalog by a KB number or a GUID of an update set.
-
-    .PARAMETER KB
-    Knowledge base article number. Example: 4038793
-
-    .PARAMETER GUID
-    GUID of an update set. The GUID uniquely identifies a set of files for a KB article-product pair.
-
-    .PARAMETER SearchCriteria
-    Product name (or a part of it). If an update has been released for several products (like different OSes), use the parameter to specify which product ot target.
-
-    .PARAMETER SearchType
-    You can choose in which column search for the value from "SearchCriteria" parameter: Product, Title or both (ProductAndTitle).
-
-    .PARAMETER Platform
-    You can choose for which platform do you need an update file.
-
-    .PARAMETER DestinationFolder
-    A folder where downloaded files will be saved.
-
-    .PARAMETER LinksOnly
-    Instructs the function to return only links to files w/o downloading them.
-
-    .PARAMETER ForceSSL
-    By default the Update Catalog returns HTTP links. Use this parameter to download files through HTTPS.
-    Note that due to differences in CDN nodes set up, sometimes HTTPS downloads may fail.
-
-    .PARAMETER SearchPageTemplate
-    A URL of a web-page with a list of available update sets for a KB.
-
-    .PARAMETER DownloadPageTemplate
-    A URL of a web page with a list of available files for an update set.
-
-    .EXAMPLE
-    # Download files for KB article #3172729 for Windows Server 2012 R2.
-    Get-WUFileByID -KB 3172729 -SearchCriteria 'Windows Server 2012 R2'
-
-    .EXAMPLE
-    # Download update files by a known update set GUID
-    Get-WUFileByID -GUID 2c61a788-27e5-44f9-b27b-1ca22b4592d9
-
-    .EXAMPLE
-    #Download a full rollup October 2017 update for 64-bit version of Windows 10 (1703) using "Platform" parameter
-    Get-WUFileByID -KB 4041676 -SearchCriteria 'Cumulative Update for Windows 10 Version 1703' -Platform x64
-
-    .EXAMPLE
-    #Get download links for a full October 2017 rollup update for 64-bit version of Windows 10 (1703) using "SearchCriteria" parameter
-    Get-WUFileByID -KB 4041676 -SearchCriteria 'Cumulative Update for Windows 10 Version 1703 for x64' -LinksOnly
-
-    .EXAMPLE
-    # Download all updates required for a computer
-
-    $Criteria = "IsInstalled=0 and Type='Software'"
-    $Searcher = New-Object -ComObject Microsoft.Update.Searcher
-    $SearchResult = $Searcher.Search($Criteria).Updates
-    [string[]]$KBIDs = ''
-    ($SearchResult | Select-Object Title).Title | ForEach-Object{
-        $null = $_ -match '^.+\(KB(\d+)\)$'
-        $KBIDs += $matches[1]
-    }
-    foreach ($ID in $KBIDs) {
-        Get-WUFileByID -KB $ID -SearchCriteria 'Windows Server 2008 R2'
-    }
-
-    .NOTES
-    Author: Kirill Nikolaev
-    Twitter: @exchange12rocks
-    Web-site: https://exchange12rocks.org
-    GitHub: https://github.com/exchange12rocks
-
-    .LINK
-    https://exchange12rocks.org/2017/10/02/function-to-download-updates-from-microsoft-catalog
-
-    .LINK
-    https://github.com/exchange12rocks/WU/tree/master/Get-WUFilebyID
-
     #>
 
     #Requires -Version 3.0
@@ -546,4 +444,5 @@ function Get-WUFileByID {
             return
         }
     }
+    #>
 }
