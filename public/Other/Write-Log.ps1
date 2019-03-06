@@ -40,7 +40,7 @@
      [CmdletBinding()]
      Param (
          [Parameter(Mandatory = $true, ParameterSetName = "Message", ValueFromPipeline = $true)][string]$Message,
-         [Parameter(Mandatory = $false, ParameterSetName = "Message")] [ValidateSet("Info", "Error", "Warn")][string]$Level = "Info",
+         [Parameter(Mandatory = $false, ParameterSetName = "Message")] [ValidateSet("Info", "Error", "Warn","Success")][string]$Level = "Info",
          [Parameter(Mandatory = $false, ParameterSetName = "Message", ValueFromPipeline = $true)][switch]$Step,           
          [Parameter(Mandatory = $true, ParameterSetName = "StartLog", ValueFromPipeline = $true)][switch]$StartLog,
          [Parameter(Mandatory = $true, ParameterSetName = "EndLog", ValueFromPipeline = $true)][switch]$EndLog,
@@ -96,7 +96,7 @@
              # Log file creation
              [VOID] (New-Item -ItemType File -Path $LogFile -Force)
              $Header | Out-File -FilePath $LogFile -Append -Encoding UTF8
-             Write-Host $Header -ForegroundColor Cyan
+             Write-Host $Header -ForegroundColor White
              break
          }
  
@@ -109,6 +109,7 @@
                     Info    { $Icon  = "`t[+]"  ;break}
                     Error   { $Icon  = "`t[x]"  ; break}
                     Warn    { $Icon  = "`t[!]"  ;break}
+                    Success { $Icon  = "`t[+]"  ;break}
                 }
             }
             else
@@ -119,42 +120,15 @@
              $TimeStamp = Get-Date -UFormat "%H:%M:%S"
              switch ($Level)
              {
-                 Info { $Line  = ("[{0}][INFO   ] {1} {2}" -f $TimeStamp,$Icon, $Message); $Color = 'Cyan'; break }
-                 Error { $Line = ("[{0}][ERROR  ] {1} {2}" -f $TimeStamp,$Icon, $Message); $Color = 'Red'; break }
-                 Warn { $Line  = ("[{0}][WARNING] {1} {2}" -f $TimeStamp,$Icon, $Message); $Color = 'Yellow'; break }
+                 Info    { $Line     = ("[{0}][INFO   ] {1} {2}" -f $TimeStamp,$Icon, $Message); $Color = 'White'; break }
+                 Error   { $Line    = ("[{0}][ERROR  ] {1} {2}" -f $TimeStamp,$Icon, $Message); $Color = 'Red'; break }
+                 Warn    { $Line     = ("[{0}][WARNING] {1} {2}" -f $TimeStamp,$Icon, $Message); $Color = 'Yellow'; break }
+                 Success { $Line  = ("[{0}][SUCCESS] {1} {2}" -f $TimeStamp,$Icon, $Message); $Color = 'Green'; break }
              }
 
              Write-Host $Line -ForegroundColor $Color
              "$Line" | Out-File -FilePath $LogFile -Append -Encoding UTF8
  
-             break
-         }
- 
-         "Step" #Status d'un ?tape sur la meme ligne
-         {
-            switch ($Level)
-            {
-                Info    { $Icon  = "`t[+]"  ;break}
-                Error   { $Icon  = "`t[x]"  ; break}
-                Warn    { $Icon  = "`t[!]"  ;break}
-            }
-             $Message = "$($Icon) $Message"
-             
- 
-             #Déplacement Cursor
-              $ConsoleY = ([System.Console]::CursorTop) - 1
-              [System.Console]::SetCursorPosition(0,$ConsoleY)
- 
-             Write-Host $PreviousLine -ForegroundColor Cyan  -NoNewline
-             Write-Host $Message -ForegroundColor $Color
-
-             $TempContent = Get-Content $LogFile 
-             $TempContent = $TempContent | Select-Object -First (($TempContent.count)-1)
-             Set-Content -Path $LogFile -Value $TempContent -Encoding UTF8
-            
-             $Line = "$PreviousLine"+"  $Message"
-             Add-Content -Path $LogFile -Value $Line -Encoding UTF8
-
              break
          }
  
@@ -171,7 +145,7 @@
              $Footer += "+========================================================================================+"
  
              $Footer| Out-File -FilePath $LogFile -Append -Encoding UTF8
-             Write-Host $Footer -ForegroundColor Cyan
+             Write-Host $Footer -ForegroundColor White
          }
  
      }
