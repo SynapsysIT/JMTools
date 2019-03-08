@@ -7,7 +7,10 @@
         param ($menuItems, $menuPosition, $Multiselect, $selection, [string]$Color = "Green", $Title)
 
         $ConsoleWidth = $Host.ui.RawUI.WindowSize.Width
-        $Width = $ConsoleWidth - 2
+        #$Width = $ConsoleWidth - 2
+        $Width = ($menuItems.Name | Sort-object Length -Descending | Select-Object -First 1).Length + 20
+        if ($Title.Length -gt $Width){$Width = $Title.Length}
+
         [string]$TopLeft = [char]0x250C
         [string]$TopRight = [char]0x2510
         [string]$BotLeft = [char]0x2514
@@ -15,15 +18,35 @@
         [string]$Bar = [char]0x2502
         [string]$HorBar = [char]0x2500
         [string]$Cursor = [char]0x25ba
-        $TitleBar = $Title + $(" " * $($Width - $($Title.Length) - 1))
-        $TopLine = "$($TopLeft)$(($HorBar * $Width))$($TopRight)"
+        [string]$TitleLeftBar = [char]0x251C
+        [string]$TitleRightBar = [char]0x2524
+        #$TitleBar = $Title + $(" " * $($Width - $($Title.Length) - 1))
+
+        $TopLine = "$($TopLeft)$($HorBar * $Width)$($TopRight)"
         $BotLine = "$($BotLeft)$(($HorBar * $Width))$($BotRight)"
+
+        Write-Host ""
+        if ($Title)
+        {
+            #TopLine
+            Write-Host $("{0}{1}{2}" -f $TopLeft,$($HorBar * $Width),$TopRight) -ForegroundColor $Color
+
+            Write-Host $bar -ForegroundColor $Color -NoNewline
+            Write-Host "$($Title + $(" " * $($Width - $($Title.Length))))" -ForegroundColor $Color -NoNewline
+            Write-Host $bar -ForegroundColor $Color
+
+            #TitleLine
+            Write-Host $("{0}{1}{2}" -f $TitleLeftBar,$($HorBar * $Width),$TitleRightBar) -ForegroundColor $Color
+        }
+        else
+        {
+            #TopLine
+            Write-Host $("{0}{1}{2}" -f $TopLeft,$($HorBar * $Width),$TopRight)
+        }
+
+
         $BlankLine = "$($Bar)$((" " * $Width))$($Bar)"
 
-        Write-Host $TopLine -ForegroundColor $Color
-        Write-Host "$($Bar)" -NoNewline -ForegroundColor $Color
-        Write-Host " $($TitleBar)" -BackgroundColor $Color -ForegroundColor Black -NoNewline
-        Write-Host "$($Bar)" -NoNewline -ForegroundColor $Color
         Write-Host $BlankLine -ForegroundColor $Color
 
         $l = $menuItems.length
