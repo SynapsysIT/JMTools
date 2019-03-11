@@ -41,7 +41,7 @@
         else
         {
             #TopLine
-            Write-Host $("{0}{1}{2}" -f $TopLeft,$($HorBar * $Width),$TopRight)
+            Write-Host $("{0}{1}{2}" -f $TopLeft,$($HorBar * $Width),$TopRight) -ForegroundColor $Color
         }
 
 
