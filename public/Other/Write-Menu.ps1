@@ -7,8 +7,8 @@
         param ($menuItems, $menuPosition, $Multiselect, $selection, [string]$Color = "Green", $Title)
 
         $ConsoleWidth = $Host.ui.RawUI.WindowSize.Width
-        #$Width = $ConsoleWidth - 2
-        $Width = ($menuItems.Name | Sort-object Length -Descending | Select-Object -First 1).Length + 20
+        $Width = $ConsoleWidth - 2
+        #$Width = ($menuItems.Name | Sort-object Length -Descending | Select-Object -First 1).Length + 20
         if ($Title.Length -gt $Width){$Width = $Title.Length}
 
         [string]$TopLeft = [char]0x250C
