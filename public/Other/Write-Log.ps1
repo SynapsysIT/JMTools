@@ -6,20 +6,20 @@
     Function pour logger dans la console et dans un fichier
 
 .EXAMPLE
-    # D?marrer le script
+    # Démarrer le script
     Write-Log -StartLog -LogFile $LogFile
 
     Write-Log -Level Error -Message "Message d'erreur" -LogFile $LogFile
     Write-Log -Level Warn -Message "Message d'avertissement" -LogFile $LogFile
     Write-Log -Level Info -Message "Message d'info" -LogFile $LogFile
 
-    #Ecrire le r?sultat d'une ?tape 
+    #Ecrire le résultat d'une étape [TAB]
     Write-Log -Step -Message "OK" -LogFile $LogFile
 
     #Finir le script
     Write-Log -Endlog -LogFile $LogFile
 
-    #Definir le param?tre LogFile par defaut :
+    #Definir le paramétre LogFile par defaut :
     
     $LogFile = 'C:\logs\mylogfile.log'
     $PSDefaultParameterValues = @{ 'Write-Log:LogFile'   = $LogFile}
@@ -61,7 +61,7 @@
              $script:StartDate = Get-Date
              $LogStartDate_str = Get-Date -UFormat "%d-%m-%Y %H:%M:%S"
  
-             #Information Syst?me & Contexte
+             #Information Systéme & Contexte
              $Current = [Security.Principal.WindowsIdentity]::GetCurrent()
              $CurrentUser = $Current.Name
              $CurrentComputer = $ENV:COMPUTERNAME
@@ -107,7 +107,7 @@
                 switch ($Level)
                 {
                     Info    { $Icon  = "`t[+]"  ;break}
-                    Error   { $Icon  = "`t[x]"  ; break}
+                    Error   { $Icon  = "`t[x]"  ;break}
                     Warn    { $Icon  = "`t[!]"  ;break}
                     Success { $Icon  = "`t[+]"  ;break}
                 }
@@ -132,7 +132,7 @@
              break
          }
  
-         "EndLog" #Status d'un ?tape sur la meme ligne
+         "EndLog" 
          {
              $EndDate  = Get-Date
              $TimeSpan = New-TimeSpan -Start $StartDate -End $EndDate
