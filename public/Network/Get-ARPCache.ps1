@@ -4,8 +4,9 @@
 # Autor        :  Julien Mazoyer
 # Description  :  Get the ARP cache
 ###############################################################################################################
-
-<#
+function Get-ARPCache
+{
+    <#
     .SYNOPSIS
     Get the ARP cache
 
@@ -34,13 +35,7 @@
     192.168.178.22 192.168.178.255 FF-00-00-00-00-FF static
     192.168.178.22 224.0.0.22      01-00-00-00-00-16 static
     192.168.178.22 239.255.255.250 01-00-00-00-00-FA static
-
-    .LINK
-    https://github.com/BornToBeRoot/PowerShell/blob/master/Documentation/Function/Get-ARPCache.README.md
 #>
-
-function Get-ARPCache
-{
     [CmdletBinding()]
     param(
 

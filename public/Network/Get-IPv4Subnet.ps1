@@ -1,4 +1,7 @@
-<#
+
+function Convert-IPv4Address
+{
+    <#
     .SYNOPSIS
     Calculate a subnet based on an IP-Address and the subnetmask or CIDR
 
@@ -25,10 +28,6 @@
     .LINK
     https://github.com/BornToBeRoot/PowerShell/blob/master/Documentation/Function/Get-IPv4Subnet.README.md
 #>
-
-
-function Convert-IPv4Address
-{
     [CmdletBinding(DefaultParameterSetName='IPv4Address')]
     param(
         [Parameter(

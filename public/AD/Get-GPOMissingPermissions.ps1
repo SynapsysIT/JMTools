@@ -1,39 +1,60 @@
-﻿function Get-GPOMissingPermissions {
+﻿###############################################################################################################
+# Language     :  PowerShell 4.0
+# Filename     :  Get-GPOMissingPermissions.ps1
+# Autor        :  Julien Mazoyer
+# Description  :  Get GPO where "Authentificated Users" & "Domain Computers" have no permissions. These GPO are not applied to any Users / Computers.
+###############################################################################################################
+
+function Get-GPOMissingPermissions
+{
+    <#
+    .SYNOPSIS
+    Get-GPO Missing Permissions
+
+    .DESCRIPTION
+    Get GPO where "Authentificated Users" & "Domain Computers" have no permissions. These GPO are not applied to any Users / Computers.
+
+    .EXAMPLE
+    PS C:\>Get-GPOMissingPermissions
+#>
     [cmdletbinding()]
     param ()
-    try {
+    try
+    {
         Write-Verbose -Message "Importing GroupPolicy module"
         Import-Module GroupPolicy -ErrorAction Stop
     }
-    catch {
+    catch
+    {
         Write-Error -Message "GroupPolicy Module not found. Make sure RSAT (Remote Server Admin Tools) is installed"
         exit
     }
     $MissingPermissionsGPOArray = New-Object System.Collections.ArrayList
-    try {
+    try
+    {
         Write-Verbose -Message "Importing GroupPolicy Policies"  
         $GPOs = Get-GPO -All  
         Write-Verbose -Message "Found '$($GPOs.Count)' policies to check"
     }
-    catch {
+    catch
+    {
         Write-Error -Message "Can't Load GPO's Please make sure you have connection to the Domain Controllers"
         exit
     }
-    ForEach ($gpo  in $GPOs) { 
+    ForEach ($gpo  in $GPOs)
+    { 
         Write-Verbose -Message "Checking '$($gpo.DisplayName)' status"
-        If ($GPO.User.Enabled) {
-            $GPOPermissionForAuthUsers = Get-GPPermission -Guid $GPO.Id -All | Select-Object -ExpandProperty Trustee | Where-Object {$_.Name -eq "Authenticated Users"}
-            $GPOPermissionForDomainComputers = Get-GPPermission -Guid $GPO.Id -All | Select-Object -ExpandProperty Trustee | Where-Object {$_.Name -eq "Domain Computers"}
-            If (!$GPOPermissionForAuthUsers -and !$GPOPermissionForDomainComputers) {
+        If ($GPO.User.Enabled)
+        {
+            $GPOPermissionForAuthUsers = Get-GPPermission -Guid $GPO.Id -All | Select-Object -ExpandProperty Trustee | Where-Object { $_.Name -eq "Authenticated Users" }
+            $GPOPermissionForDomainComputers = Get-GPPermission -Guid $GPO.Id -All | Select-Object -ExpandProperty Trustee | Where-Object { $_.Name -eq "Domain Computers" }
+            If (!$GPOPermissionForAuthUsers -and !$GPOPermissionForDomainComputers)
+            {
                 $MissingPermissionsGPOArray += $gpo
             }
         }
     }
-    if (($MissingPermissionsGPOArray).Count -ne 0) {
-        Write-Host "The following GPO's do not grant any permissions to the 'Authenticated Users' Or 'Domain Computers' Group"
-        return $MissingPermissionsGPOArray.DisplayName
-    }
-    else {
-        return [string]"No GPO's with missing permissions to the 'Authenticated Users' or 'Domain Computers' groups found "
-    }
+
+    return $MissingPermissionsGPOArray.DisplayName
+
 }

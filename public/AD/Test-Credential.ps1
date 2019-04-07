@@ -5,7 +5,8 @@
 # Description  :  Test an authentification in AD or local context
 ###############################################################################################################
 
-<#
+function Test-Credential {
+    <#
     .SYNOPSIS
     Test an authentification in AD or local context
 
@@ -23,7 +24,6 @@
     PS C:\> $cred = get-credential
     PS C:\> Test-Credential -ComputerName SomeComputer -Credential $cred
 #>
-function Test-Credential {
 
     [cmdletbinding(DefaultParameterSetName = 'Domain')]
     param(

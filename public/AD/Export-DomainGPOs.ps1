@@ -4,8 +4,9 @@
 # Autor        :  Julien Mazoyer
 # Description  :  Export HTML Report of all GPO in a domain
 ###############################################################################################################
-
-<#
+Function Export-DomainGPOs
+{
+    <#
     .SYNOPSIS
     Export HTML Report of all GPO in a domain
 
@@ -15,9 +16,6 @@
     .EXAMPLE
     PS C:\> Export-DomainGPOs -OutputDirectory C:\TEMP\ -Verbose
 #>
-
-Function Export-DomainGPOs
-{
     [CmdletBinding()]
     Param (
         [Parameter(Mandatory = $true)][String]$OutputDirectory,

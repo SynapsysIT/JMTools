@@ -1,11 +1,28 @@
+###############################################################################################################
+# Language     :  PowerShell 4.0
+# Filename     :  Get-GpResult.ps1
+# Autor        :  Julien Mazoyer
+# Description  :  Custom Powershell Gpresult
+###############################################################################################################
+
 function Get-GpResult {
+    <#
+    .SYNOPSIS
+    Get GPO Result
+
+    .DESCRIPTION
+    Custom Powershell Gpresult
+
+    .EXAMPLE
+    PS C:\>Get-GPResult
+#>
     [CmdletBinding()]
     param ()
 
 
-        Write-Verbose "[+] GÃ©nÃ©ration des RSoP ..."
+        Write-Verbose "[+] Génération des RSoP ..."
         $TempFile = "C:\Users\$env:USERNAME\AppData\Local\Temp\{0}.xml" -f $(New-Guid).Guid
-        Get-GPResultantSetOfPolicy  -ReportType Xml -Path $TempFile | Out-Null
+        Get-GPResultantSetOfPolicy -ReportType Xml -Path $TempFile | Out-Null
 
 
         [xml]$XML = Get-Content $TempFile
@@ -38,7 +55,7 @@ function Get-GpResult {
             if (($GPO.FilterAllowed -eq "true") `
                 -AND ($GPO.IsValid -eq "true") `
                 -AND ($GPO.AccessDenied -eq "false") `
-                -AND ($GPO.Enabled -eq "true")) {$Applied = "YES"} else {$Applied = "NO"}
+                -AND ($GPO.Enabled -eq "true")) {$Applied = $true} else {$Applied = $false}
 
             $Temp = [PSCustomObject]@{
                 Target = "Computer"

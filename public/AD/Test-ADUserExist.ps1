@@ -4,8 +4,9 @@
 # Autor        :  Julien Mazoyer
 # Description  :  Test if a AD User exist in the AD Domain
 ###############################################################################################################
-
-<#
+function Test-ADUserExists
+{
+	<#
     .SYNOPSIS
     Test if a AD User exist in the AD Domain
 
@@ -16,9 +17,6 @@
 	PS C:\> Test-ADUserExists j.mazoyer
 	True
 #>
-
-function Test-ADUserExists
-{
 	param(
 		[Parameter(Mandatory)]
 		[string]$SAMAccountName

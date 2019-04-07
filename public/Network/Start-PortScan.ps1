@@ -5,6 +5,9 @@
 # Description  :  Start a port scan on the selected computer.
 ###############################################################################################################
 
+function Start-PortScan
+{
+	
 <#
     .SYNOPSIS
     Start a port scan on the selected computer.
@@ -33,41 +36,6 @@
 
 	...
 #>
-function Start-PortScan
-{
-    <#
-		.SYNOPSIS
-			Conducts a port scan on the selected computer.
-
-		.DESCRIPTION
-			Tries to connect to common ports on a targetted system and reports back the port status of each. Each connection is scheduled as a job; the function waits for all jobs to exit the running status before returning scan information.
-
-		.PARAMETER ComputerName
-			The name of the computer to scan. The parameter defaults to "localhost"
-
-		.INPUTS
-			System.String
-
-				The input can be piped to Start-PortScan
-
-		.OUTPUTS
-			System.Management.Automation.PSCustomObject[]
-
-				Each custom object has a property of Service, Port, and Status. Status is either Open or Closed.
-
-		.EXAMPLE
-			Start-PortScan -ComputerName remotecomputer.net
-
-			Returns an array of open and closed ports on remotecomputer.net
-
-		.NOTES
-			AUTHOR: Michael Haken
-			LAST UPDATE: 2/27/2016
-
-		.FUNCTIONALITY
-			The intended use of this cmdlet is to conduct a security scan of ports on a computer.
-
-	#>
 	[CmdletBinding()]
 	[OutputType([System.Management.Automation.PSCustomObject[]])]
 	Param(

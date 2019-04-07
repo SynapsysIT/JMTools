@@ -1,12 +1,13 @@
 ###############################################################################################################
 # Language     :  PowerShell 4.0
 # Filename     :  Update-StringInFile.ps1
-# Autor        :  BornToBeRoot (https://github.com/BornToBeRoot)
+# Autor        :  Julien Mazoyer Fork from BornToBeRoot (https://github.com/BornToBeRoot)
 # Description  :  Replace a string in multiple files
 # Repository   :  https://github.com/BornToBeRoot/PowerShell
 ###############################################################################################################
-
-<#
+function Update-StringInFile
+{
+	<#
     .SYNOPSIS
     Replace a string in one or multiple files
                  
@@ -26,13 +27,7 @@
 	VERBOSE: Number of strings to replace in current file: 1
 	VERBOSE: Current file: E:\Temp\Files\File_03.txt
 	VERBOSE: Number of strings to replace in current file: 2
-	   
-    .LINK
-    https://github.com/BornToBeRoot/PowerShell/blob/master/Documentation/Function/Update-StringInFile.README.md
 #>
-
-function Update-StringInFile
-{
 	[CmdletBinding(SupportsShouldProcess=$true)]
 	Param(
 		[Parameter(

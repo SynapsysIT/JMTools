@@ -1,6 +1,6 @@
 ﻿function Write-Menu
 {
-    param ([array]$menuItems, [switch]$ReturnIndex = $false, [switch]$Multiselect, [string]$Color = "Green", $Title)
+    param ([array]$menuItems, [switch]$ReturnIndex = $false, [switch]$Multiselect, [string]$Color = "Green", [string]$Title,[switch]$Help)
 
     #ScriptBlock génération du menu
     [scriptblock]$SB_DrawMenu = {
@@ -29,25 +29,22 @@
         if ($Title)
         {
             #TopLine
-            Write-Host $("{0}{1}{2}" -f $TopLeft,$($HorBar * $Width),$TopRight) -ForegroundColor $Color
+            #Write-Host $("{0}{1}{2}" -f $TopLeft,$($HorBar * $Width),$TopRight) -ForegroundColor $Color
 
-            Write-Host $bar -ForegroundColor $Color -NoNewline
-            Write-Host "$($Title + $(" " * $($Width - $($Title.Length))))" -ForegroundColor $Color -NoNewline
-            Write-Host $bar -ForegroundColor $Color
+            #Write-Host $bar -ForegroundColor $Color -NoNewline
+            Write-Host "$($Title + $(" " * $($Width - $($Title.Length))))"
+            #Write-Host $bar -ForegroundColor $Color
 
             #TitleLine
-            Write-Host $("{0}{1}{2}" -f $TitleLeftBar,$($HorBar * $Width),$TitleRightBar) -ForegroundColor $Color
+            #Write-Host $("{0}{1}{2}" -f $TitleLeftBar,$($HorBar * $Width),$TitleRightBar) -ForegroundColor $Color
         }
         else
         {
             #TopLine
-            Write-Host $("{0}{1}{2}" -f $TopLeft,$($HorBar * $Width),$TopRight) -ForegroundColor $Color
+           # Write-Host $("{0}{1}{2}" -f $TopLeft,$($HorBar * $Width),$TopRight) -ForegroundColor $Color
         }
 
-
-        $BlankLine = "$($Bar)$((" " * $Width))$($Bar)"
-
-        Write-Host $BlankLine -ForegroundColor $Color
+        #Write-Host $BlankLine -ForegroundColor $Color
 
         $l = $menuItems.length
         for ($i = 0; $i -le $l; $i++)
@@ -68,29 +65,28 @@
                 }
                 if ($i -eq $menuPosition)
                 {
-                    $Line = " $Cursor $($item)"
-                    Write-Host $Bar -ForegroundColor $Color -NoNewline
-                    Write-Host "$Line$(" " * ($Width - $Line.Length))" -ForegroundColor $Color  -NoNewline 
-                    Write-Host $Bar -ForegroundColor $Color
+                    $Line = " > $($item)"
+                    Write-Host "$Line" -ForegroundColor $Color
                 }
                 else
                 {
                     $Line = "   $($item)"
-                    Write-Host $Bar -ForegroundColor $Color -NoNewline
-                    Write-Host "$Line$(" " * ($Width - $Line.Length))" -ForegroundColor $Color -NoNewline
-                    Write-Host $Bar -ForegroundColor $Color
+                    Write-Host "$Line"
                 }
             }
         }
-        Write-Host $BlankLine -ForegroundColor $Color
-        Write-Host $BotLine -ForegroundColor $Color
-        if ($Multiselect)
+        if ($Help)
         {
-            Write-Host "Select - [SPACE] | Change - [UP/DOWN]" -ForegroundColor $Color
-        }
-        else
-        {
-            Write-Host "Select - [ENTER] | Change - [UP/DOWN]" -ForegroundColor $Color
+            if ($Multiselect)
+            {
+                Write-Host ""
+                Write-Host "Select - [SPACE] | Change - [UP/DOWN]" -ForegroundColor $Color
+            }
+            else
+            {
+                Write-Host ""
+                Write-Host "Select - [ENTER] | Change - [UP/DOWN]" -ForegroundColor $Color
+            }
         }
     
     }

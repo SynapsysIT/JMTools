@@ -1,4 +1,21 @@
-﻿function Get-GPODisabled {
+﻿###############################################################################################################
+# Language     :  PowerShell 4.0
+# Filename     :  Get-GPODisabled.ps1
+# Autor        :  Julien Mazoyer
+# Description  :  Get-GPODisabled
+###############################################################################################################
+
+function Get-GPODisabled {
+<#
+    .SYNOPSIS
+    Get GPO which are disabled
+
+    .DESCRIPTION
+    Get GPO Settings status Enabled/Disabled
+
+    .EXAMPLE
+    PS C:\> Get-GPODisabled
+#>
     [cmdletbinding()]
     param (
     )

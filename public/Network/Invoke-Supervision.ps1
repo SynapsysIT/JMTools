@@ -1,10 +1,12 @@
 ###############################################################################################################
 # Language     :  PowerShell 4.0
-# Filename     :  Find-StringInFile.ps1
+# Filename     :  Invoke-Supervision.ps1
 # Autor        :  Julien Mazoyer
 # Description  :  Show a graphical table with ping status of multiple hosts
 ###############################################################################################################
 
+Function Invoke-Supervision
+{
 <#
     .SYNOPSIS
     Show a graphical table with ping status of multiple hosts
@@ -21,8 +23,6 @@
 
 
 #>
-Function Invoke-Supervision
-{
     #Parameter Definition
     Param
     (

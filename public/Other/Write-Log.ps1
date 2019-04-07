@@ -1,4 +1,12 @@
 <#
+.NOTES
+    ##################################################################
+    Author:     Julien Mazoyer
+    Name:       Write-Log
+    
+    Date        
+    10/04/2018      Creation
+    ##################################################################
 .SYNOPSIS
     Function de Log
 
@@ -23,16 +31,6 @@
     
     $LogFile = 'C:\logs\mylogfile.log'
     $PSDefaultParameterValues = @{ 'Write-Log:LogFile'   = $LogFile}
-
-
-.NOTES
-    ##################################################################
-    Author:     Julien Mazoyer
-    Name:       Write-Log
-    
-    Date        
-    10/04/2018      Creation
-    ##################################################################
  #>
 
  function Write-Log 

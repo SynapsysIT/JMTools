@@ -1,18 +1,20 @@
 ###############################################################################################################
 # Language     :  PowerShell 4.0
 # Filename     :  Find-StringInFile.ps1
-# Autor        :  BornToBeRoot (https://github.com/BornToBeRoot)
-# Description  :  Find a string in multiple files
+# Autor        :  Julien Mazoyer Fork from BornToBeRoot (https://github.com/BornToBeRoot)
+# Description  :  Test an authentification in AD or local context
 ###############################################################################################################
-
-<#
+function Find-StringInFile
+{
+	<#
     .SYNOPSIS
-    Find a string in one or multiple files
+    Find String in one or more files
 
     .DESCRIPTION
-    Find a string in one or multiple files.
+     Find String in one or more files
 
     .EXAMPLE
+
     Find-StringInFile -Path "C:\Scripts\FolderWithFiles" -Search "Test01"
 
 	Filename    Path                      LineNumber Matches
@@ -20,19 +22,7 @@
 	File_01.txt E:\Temp\Files\File_01.txt          1 {Test01}
 	File_02.txt E:\Temp\Files\File_02.txt          1 {TEST01}
 	File_03.txt E:\Temp\Files\File_03.txt          1 {TeST01}
-
-	.EXAMPLE
-	Find-StringInFile -Path "C:\Scripts\FolderWithFiles" -Search "TEST01" -CaseSensitive
-
-	Filename    Path                      LineNumber Matches
-	--------    ----                      ---------- -------
-	File_02.txt E:\Temp\Files\File_02.txt          1 {TEST01}
-
-
 #>
-
-function Find-StringInFile
-{
 	[CmdletBinding()]
 	param(
 	[Parameter(
