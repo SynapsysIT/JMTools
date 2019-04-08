@@ -8,19 +8,16 @@ Ma boite à outils Powershell, l'ensemble des functions que j'utilise quotidienn
 cd ($env:PSModulePath -split ";")[0]
 git clone https://git.reyozam.xyz/Xeph/JMTools.git
 ```
-## Les Principales functions
+## Quelques Demos (tape à l'oeil ;) ...
 
- **Write-LineProgress:**
-Permet d'afficher une barre dans la console
+**Out-HTML**
+Permet de créér un rapport HTML personnalisé avec son code CSS
+et de colorer les lignes en fonction de leurs contenus.
 
  ````powershell
-for ($i = 0; $i -le 100; $i++) 
-{
-    Write-LineProgress -Activity "Demo" -Progress $i    
-}
+Get-Service | Select-Object Name,Status | Out-HTML -Path .\ServiceReport.html -Title "Services" -SuccessMatch "Running" -ErrorMatch "Stopped"
  ```
- 
-![Write-Log](images/lineprogress.gif)
+ ![Out-HTML](images/outhtml.gif)
 
 
  **Write-Log:**
@@ -40,8 +37,19 @@ Write-Log -EndLog -LogFile $LogFile
  
 ![Write-Log](images/WriteLog.png)
 
+ **Write-LineProgress**
+Permet d'afficher une barre dans la console
 
-## Functions
+ ````powershell
+for ($i = 0; $i -le 100; $i++) 
+{
+    Write-LineProgress -Activity "Demo" -Progress $i    
+}
+ ```
+ 
+![Write-LineProgress](images/lineprogress.gif)
+
+## Toutes les functions
 
 ```powershell
 Get-Command -Module JMTools
