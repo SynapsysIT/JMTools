@@ -9,6 +9,7 @@ cd ($env:PSModulePath -split ";")[0]
 git clone https://git.reyozam.xyz/Xeph/JMTools.git
 ```
 ou 
+
 Télécharger : https://github.com/SynapsysIT/JMTools/archive/master.zip
 Dézipper le contenu dans C:\%username%\Documents\WindowsPowershell\Modules\JMTools
 
