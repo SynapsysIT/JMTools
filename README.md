@@ -10,6 +10,19 @@ git clone https://git.reyozam.xyz/Xeph/JMTools.git
 ```
 ## Les Principales functions
 
+ **Write-LineProgress:**
+Permet d'afficher une barre dans la console
+
+ ````powershell
+for ($i = 0; $i -le 100; $i++) 
+{
+    Write-LineProgress -Activity "Demo" -Progress $i    
+}
+ ```
+ 
+![Write-Log](images/lineprogress.gif)
+
+
  **Write-Log:**
  Functions permettant le log visuel dans la console et le log dans un fichier simultanément
 
@@ -26,6 +39,7 @@ Write-Log -EndLog -LogFile $LogFile
  ```
  
 ![Write-Log](images/WriteLog.png)
+
 
 ## Functions
 
