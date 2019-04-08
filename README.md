@@ -1,14 +1,14 @@
-### Présentation
+# Présentation
 
 Ma boite à outils Powershell, l'ensemble des functions que j'utilise quotidiennement.
 
-## Installation
+# Installation
 
 ```powershell
 cd ($env:PSModulePath -split ";")[0]
 git clone https://git.reyozam.xyz/Xeph/JMTools.git
 ```
-## Quelques Demos (tape à l'oeil ;) ...
+# Quelques Demos (tape à l'oeil ;) ...
 
 **Out-HTML**
 Permet de créér un rapport HTML personnalisé avec son code CSS
