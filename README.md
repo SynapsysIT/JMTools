@@ -8,7 +8,7 @@ Ma boite à outils Powershell, l'ensemble des functions que j'utilise quotidienn
 cd ($env:PSModulePath -split ";")[0]
 git clone https://git.reyozam.xyz/Xeph/JMTools.git
 ```
-# Quelques Demos (tape à l'oeil ;) ...
+# Quelques Demos...
 
 ## Out-HTML
 
