@@ -25,7 +25,7 @@ Get-Service | Select-Object Name,Status | Out-HTML -Path .\ServiceReport.html -T
  
  Functions permettant le log visuel dans la console et le log dans un fichier simultanément
 
- ````powershell
+ ```powershell
 $LogFile = "C:\temp\LogFile.log"
 
 Write-Log -StartLog -LogFile $LogFile
@@ -42,7 +42,7 @@ Write-Log -EndLog -LogFile $LogFile
 ## Write-LineProgress
 Permet d'afficher une barre dans la console
 
- ````powershell
+ ```powershell
 for ($i = 0; $i -le 100; $i++) 
 {
     Write-LineProgress -Activity "Demo" -Progress $i    
