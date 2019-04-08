@@ -1,4 +1,6 @@
-Mon module
+## Présentation
+
+Ma boite à outils Powershell, l'ensemble des functions que j'utilise quotidiennement.
 
 ## Installation
 
@@ -6,6 +8,12 @@ Mon module
 cd ($env:PSModulePath -split ";")[0]
 git clone https://git.reyozam.xyz/Xeph/JMTools.git
 ```
+## Les Principales functions
+
+ **Write-Log:**
+ Functions permettant le log visuel dans la console et le log dans un fichier simultanément
+ 
+![enter image description here](https://github.com/SynapsysIT/Powershell/raw/master/Ressources/Images/Write-Log.png)
 
 ## Functions
 
