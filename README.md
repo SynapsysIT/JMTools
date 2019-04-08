@@ -12,8 +12,20 @@ git clone https://git.reyozam.xyz/Xeph/JMTools.git
 
  **Write-Log:**
  Functions permettant le log visuel dans la console et le log dans un fichier simultanément
+
+ ````powershell
+$LogFile = "C:\temp\LogFile.log"
+
+Write-Log -StartLog -LogFile $LogFile
+Write-Log -Level Info -Message "Action en cours" -LogFile $LogFile
+Write-Log -Level Info -Message "Sous action ..." -Step -LogFile $LogFile
+Write-Log -Level Warn -Message "Avertissement !" -LogFile $LogFile
+Write-Log -Level Error -Message "Error !" -LogFile $LogFile
+Write-Log -Level Success -Message "Script OK !" -LogFile $LogFile
+Write-Log -EndLog -LogFile $LogFile
+ ```
  
-![enter image description here](https://github.com/SynapsysIT/Powershell/raw/master/Ressources/Images/Write-Log.png)
+![Write-Log](images/WriteLog.png)
 
 ## Functions
 
