@@ -54,7 +54,7 @@ for ($i = 0; $i -le 100; $i++)
 ```powershell
 Get-Command -Module JMTools
 
- Name                     | Description                                           | Link                                 
+Name                      | Description                                           | Link                                 
 ------------------------- | ----------------------------------------------------- | --------------------------------------
 ConvertFrom-Base64        | Convert a Base64 encoded string to a plain text st... | (public\ConvertFrom-Base64.ps1)       
 ConvertFrom-ErrorRecord   | Convert Powershell Error in Object to simplify exp... | (public\ConvertFrom-ErrorRecord.ps1)  
