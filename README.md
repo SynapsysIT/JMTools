@@ -10,7 +10,7 @@ git clone https://git.reyozam.xyz/Xeph/JMTools.git
 ```
 # Quelques Demos (tape à l'oeil ;) ...
 
-**Out-HTML**
+##Out-HTML
 
 Permet de créér un rapport HTML personnalisé avec son code CSS
 et de colorer les lignes en fonction de leurs contenus.
@@ -21,7 +21,7 @@ Get-Service | Select-Object Name,Status | Out-HTML -Path .\ServiceReport.html -T
  ![Out-HTML](images/outhtml.gif)
 
 
- **Write-Log:**
+ ##Write-Log:
  
  Functions permettant le log visuel dans la console et le log dans un fichier simultanément
 
@@ -39,7 +39,7 @@ Write-Log -EndLog -LogFile $LogFile
  
 ![Write-Log](images/WriteLog.png)
 
- **Write-LineProgress**
+ ##Write-LineProgress
 Permet d'afficher une barre dans la console
 
  ````powershell
@@ -51,7 +51,7 @@ for ($i = 0; $i -le 100; $i++)
  
 ![Write-LineProgress](images/lineprogress.gif)
 
-## Toutes les functions
+# Toutes les functions
 
 ```powershell
 Get-Command -Module JMTools
