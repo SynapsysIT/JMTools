@@ -56,7 +56,7 @@ Get-Command -Module JMTools
 
 Name                      | Description                                           | Link                                 
 ------------------------- | ----------------------------------------------------- | --------------------------------------
-ConvertFrom-Base64        | Convert a Base64 encoded string to a plain text st... | !(public\ConvertFrom-Base64.ps1)       
+ConvertFrom-Base64        | Convert a Base64 encoded string to a plain text st... | [I'm an inline-style link](public\ConvertFrom-Base64.ps1)       
 ConvertFrom-ErrorRecord   | Convert Powershell Error in Object to simplify exp... | (public\ConvertFrom-ErrorRecord.ps1)  
 Convert-Subnetmask        | Convert a subnetmask like 255.255.255 to CIDR (/24... | (public\Convert-Subnetmask.ps1)       
 ConvertTo-Base64          | Convert a text (command) to an Base64 encoded stri... | (public\ConvertTo-Base64.ps1)         
