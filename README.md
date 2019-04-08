@@ -11,6 +11,7 @@ git clone https://git.reyozam.xyz/Xeph/JMTools.git
 # Quelques Demos (tape à l'oeil ;) ...
 
 **Out-HTML**
+
 Permet de créér un rapport HTML personnalisé avec son code CSS
 et de colorer les lignes en fonction de leurs contenus.
 
@@ -21,6 +22,7 @@ Get-Service | Select-Object Name,Status | Out-HTML -Path .\ServiceReport.html -T
 
 
  **Write-Log:**
+ 
  Functions permettant le log visuel dans la console et le log dans un fichier simultanément
 
  ````powershell
