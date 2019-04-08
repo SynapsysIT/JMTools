@@ -15,7 +15,7 @@ git clone https://git.reyozam.xyz/Xeph/JMTools.git
 Permet de créér un rapport HTML personnalisé avec son code CSS
 et de colorer les lignes en fonction de leurs contenus.
 
- ````powershell
+ ```powershell
 Get-Service | Select-Object Name,Status | Out-HTML -Path .\ServiceReport.html -Title "Services" -SuccessMatch "Running" -ErrorMatch "Stopped"
  ```
  ![Out-HTML](images/outhtml.gif)
