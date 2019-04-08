@@ -4,9 +4,8 @@
 # Autor        :  Julien Mazoyer
 # Description  :  Test if a AD User exist in the AD Domain
 ###############################################################################################################
-function Test-ADUserExists
-{
-	<#
+
+<#
     .SYNOPSIS
     Test if a AD User exist in the AD Domain
 
@@ -17,9 +16,12 @@ function Test-ADUserExists
 	PS C:\> Test-ADUserExists j.mazoyer
 	True
 #>
-	param(
-		[Parameter(Mandatory)]
-		[string]$SAMAccountName
-	)
-@(Get-ADUser -LDAPFilter "(samaccountname=$SAMAccountName)").Count -ne 0
+function Test-ADUserExists
+{
+
+    param(
+        [Parameter(Mandatory)]
+        [string]$SAMAccountName
+    )
+    @(Get-ADUser -LDAPFilter "(samaccountname=$SAMAccountName)").Count -ne 0
 }

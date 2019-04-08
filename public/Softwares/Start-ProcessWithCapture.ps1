@@ -1,17 +1,37 @@
+###############################################################################################################
+# Language     :  PowerShell 4.0
+# Filename     :  Start-ProcessWithCapture.ps1
+# Autor        :  Julien Mazoyer
+# Description  :  Start processes and capturing output.
+###############################################################################################################
+
 <#
 .Synopsis
-   Allows running processes and capturing output.
+   Start processes and capturing output.
 .DESCRIPTION
-   Allows running processes and capturing output.
+   Start processes and capturing output.
 .EXAMPLE
-   Start-ProcessWithCapture -FilePath 'git' -ArgumentList 'pull' -WorkingDirectory $Path -ErrorAction Stop
+   $Return = Start-ProcessWithCapture -FilePath 'ping' -ArgumentList "google.fr"
+
+   Name                           Value
+   ----                           -----
+   stdout                         ...
+   exitcode                       0
+   stderr
+
+   $Return.stdout
+
+   Envoi d'une requête 'ping' sur google.fr [2a00:1450:4007:810::2003] avec 32 octets de données :
+    Réponse de 2a00:1450:4007:810::2003 : temps=2 ms
+    Réponse de 2a00:1450:4007:810::2003 : temps=2 ms
+    ...
 #>
 function Start-ProcessWithCapture
 {
     [CmdletBinding()]
     Param
     (
-        # File Path of the Process to Execute
+
         [Parameter(Mandatory = $true)]
         [string]
         $FilePath,

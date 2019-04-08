@@ -1,4 +1,57 @@
-﻿function Write-Menu
+﻿###############################################################################################################
+# Language     :  PowerShell 4.0
+# Filename     :  Write-Menu.ps1
+# Autor        :  Julien Mazoyer
+# Description  :  Create Interactive Menu , Navigate with Arrrows Keys
+###############################################################################################################
+
+<#
+    .SYNOPSIS
+    Create Menu with selection by arrows keys
+
+    .DESCRIPTION
+    Create Menu with selection by arrows keys and return selection.
+
+    .PARAMETER Multiselect
+
+    Make possible to choose multiple items. Return as an array
+
+    .EXAMPLE
+    $TopProcess = Get-Process | Sort-Object CPU | Select-Object -First 10
+
+    $Select = Write-Menu -menuItems $TopProcess.Name -Title "Selectionnez le processus a arreter:"
+
+    Selectionnez le processus a arreter:
+    ────────────────────────────────
+        > svchost
+        svchost
+        svchost
+        svchost
+        Registry
+        OfficeClickToRun
+        NvTelemetryContainer
+        OriginWebHelperService
+        svchost
+        PnkBstrA
+
+    Stop-Process $Select
+
+    .EXEMPLE
+
+    Write-Menu -menuItems @(Get-ChildItem -File) -Title "Selectionnez les fichiers a supprimer" -Multiselect
+
+    Selectionnez les fichiers a supprimer
+    ─────────────────────────────────────
+        [ ] CheckDNSPRODAD.ps1
+        [ ] DISM Demo.ps1
+        [ ] Log-20190405-1603.log
+        [x] Log-20190405-1608.log
+        [x] Log-20190407-1231.log
+        [x] PROD_PostBascule.log
+      > [x] PROD_PreBascule.log
+        [ ] Report.html
+ #>
+function Write-Menu
 {
     param ([array]$menuItems, [switch]$ReturnIndex = $false, [switch]$Multiselect, [string]$Color = "Green", [string]$Title,[switch]$Help)
 
@@ -20,7 +73,7 @@
         [string]$Cursor = [char]0x25ba
         [string]$TitleLeftBar = [char]0x251C
         [string]$TitleRightBar = [char]0x2524
-        #$TitleBar = $Title + $(" " * $($Width - $($Title.Length) - 1))
+
 
         $TopLine = "$($TopLeft)$($HorBar * $Width)$($TopRight)"
         $BotLine = "$($BotLeft)$(($HorBar * $Width))$($BotRight)"
@@ -28,23 +81,14 @@
         Write-Host ""
         if ($Title)
         {
-            #TopLine
-            #Write-Host $("{0}{1}{2}" -f $TopLeft,$($HorBar * $Width),$TopRight) -ForegroundColor $Color
 
-            #Write-Host $bar -ForegroundColor $Color -NoNewline
-            Write-Host "$($Title + $(" " * $($Width - $($Title.Length))))"
-            #Write-Host $bar -ForegroundColor $Color
-
-            #TitleLine
-            #Write-Host $("{0}{1}{2}" -f $TitleLeftBar,$($HorBar * $Width),$TitleRightBar) -ForegroundColor $Color
+            Write-Host "$($Title + $(" " * $($Width - $($Title.Length))))" -ForegroundColor $Color
+            Write-Host $($HorBar * $Title.Length) -ForegroundColor $Color
         }
         else
         {
-            #TopLine
-           # Write-Host $("{0}{1}{2}" -f $TopLeft,$($HorBar * $Width),$TopRight) -ForegroundColor $Color
-        }
 
-        #Write-Host $BlankLine -ForegroundColor $Color
+        }
 
         $l = $menuItems.length
         for ($i = 0; $i -le $l; $i++)

@@ -1,9 +1,37 @@
+###############################################################################################################
+# Language     :  PowerShell 5.0
+# Filename     :  Out-HTML.ps1
+# Autor        :  Julien Mazoyer
+# Description  :  Create a HTML Table with object send by the pipeline
+###############################################################################################################
+
+<#
+    .SYNOPSIS
+    Create a HTML Table with object send by the pipeline
+
+    .DESCRIPTION
+    Create a HTML Table with object send by the pipeline. 
+    2 CSS Theme with colored line by string match
+
+    .PARAMETER Search
+    Add a search field for dynamic search in the file
+
+    .PARAMETER SuccessMatch
+    Color Line in green where this string is present . Add counter of success on top of the table
+
+    .PARAMETER ErrorMatch
+    Color Line in red where this string is present . Add counter of error on top of the table
+
+    .EXAMPLE
+    Get-Service | Select Name,Status | Out-HTML -ErrorMatch "Stopped" -SuccessMatch "Running" -Title "Services" -Template Dark -Open -Search
+#>
 function Out-HTML
 {
+
     param
     (
 
-        [String]$Path = "$env:temp\report$(Get-Date -format yyyy-MM-dd-HH-mm-ss).html",
+        [String]$Path = "$Home\Desktop\report$(Get-Date -format yyyy-MM-dd-HH-mm-ss).html",
         [String]$Title = "PowerShell Output",
         [String]$ErrorMatch,
         [String]$WarningMatch,

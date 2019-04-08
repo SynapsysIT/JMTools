@@ -4,9 +4,8 @@
 # Autor        :  Julien Mazoyer
 # Description  :  Get GPO with no OU Link.
 ###############################################################################################################
-function Get-GPOUnlinked
-{
-    <#
+
+<#
     .SYNOPSIS
     Get GPO with no OU Link.
 
@@ -16,6 +15,9 @@ function Get-GPOUnlinked
     .EXAMPLE
     PS C:\>Get-GPOUnlinked
 #>
+function Get-GPOUnlinked
+{
+
     [cmdletbinding()]
     param ()
     try

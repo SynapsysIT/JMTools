@@ -1,10 +1,29 @@
+###############################################################################################################
+# Language     :  PowerShell 4.0
+# Filename     :  Save-CredentialVault.ps1
+# Autor        :  Julien Mazoyer
+# Description  :  Save credential to Windows Vault
+###############################################################################################################
+
+<#
+     .SYNOPSIS
+      Save credential to Windows Vault
+
+     .DESCRIPTION
+      Retrieve credential to Windows Vault
+
+     .EXAMPLE
+      $Credentials = Get-Credential
+      Save-CredentialVault -Credentials $Credentials -Description "Compte Enterprise Admin"
+
+#>
 function Save-CredentialVault
 {
 	[CmdletBinding()]
 	param
 	(
 		[Parameter(Mandatory = $true)]
-        [pscredential]$Credential,
+        [pscredential]$Credentials,
         [Parameter(Mandatory = $false)]
 		[string]$Description = "PSCredentials"
 	)
@@ -17,7 +36,7 @@ function Save-CredentialVault
     [string]$Resource = $Description
 
     # Convert and store in vault
-    $CredObject = New-Object Windows.Security.Credentials.PasswordCredential -ArgumentList ($Resource, $Credential.UserName,$Credential.GetNetworkCredential().Password)
+    $CredObject = New-Object Windows.Security.Credentials.PasswordCredential -ArgumentList ($Resource, $Credentials.UserName,$Credentials.GetNetworkCredential().Password)
     $vault.Add($CredObject)
 
 }

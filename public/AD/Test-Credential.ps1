@@ -5,8 +5,7 @@
 # Description  :  Test an authentification in AD or local context
 ###############################################################################################################
 
-function Test-Credential {
-    <#
+<#
     .SYNOPSIS
     Test an authentification in AD or local context
 
@@ -25,12 +24,16 @@ function Test-Credential {
     PS C:\> Test-Credential -ComputerName SomeComputer -Credential $cred
 #>
 
+function Test-Credential
+{
+
+
     [cmdletbinding(DefaultParameterSetName = 'Domain')]
     param(
-        [parameter(ValueFromPipeline=$true)]
+        [parameter(ValueFromPipeline = $true)]
         [System.Management.Automation.PSCredential]$Credential = $( Get-Credential -Message "Please provide credentials to test" ),
 
-        [validateset('Domain','Machine', 'ApplicationDirectory')]
+        [validateset('Domain', 'Machine', 'ApplicationDirectory')]
         [string]$Context = 'Domain',
 
         [parameter(ParameterSetName = 'Machine')]

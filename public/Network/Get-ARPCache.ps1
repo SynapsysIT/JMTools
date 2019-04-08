@@ -4,9 +4,8 @@
 # Autor        :  Julien Mazoyer
 # Description  :  Get the ARP cache
 ###############################################################################################################
-function Get-ARPCache
-{
-    <#
+
+<#
     .SYNOPSIS
     Get the ARP cache
 
@@ -36,35 +35,40 @@ function Get-ARPCache
     192.168.178.22 224.0.0.22      01-00-00-00-00-16 static
     192.168.178.22 239.255.255.250 01-00-00-00-00-FA static
 #>
+function Get-ARPCache
+{
+
     [CmdletBinding()]
     param(
 
     )
 
-    Begin{
+    Begin
+    {
 
     }
 
-    Process{
+    Process
+    {
         # Regex for IPv4-Address
         $RegexIPv4Address = "(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)"
         $RegexMACAddress = "([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})|([0-9A-Fa-f]{2}){6}"
 
         # Get the arp cache...
-        $Arp_Result = arp -a
+        $Arp_Result = ARP.EXE -a
 
-        foreach($line in $Arp_Result)
+        foreach ($line in $Arp_Result)
         {
             # Detect line where interface starts
-            if($line -like "*---*")
+            if ($line -like "*---*")
             {
                 $InterfaceIPv4 = [regex]::Matches($line, $RegexIPv4Address).Value
             }
-            elseif($line -match $RegexMACAddress)
+            elseif ($line -match $RegexMACAddress)
             {
-                foreach($split in $line.Split(" "))
+                foreach ($split in $line.Split(" "))
                 {
-                    if($split -match $RegexIPv4Address)
+                    if ($split -match $RegexIPv4Address)
                     {
                         $IPv4Address = $split
                     }
@@ -72,23 +76,24 @@ function Get-ARPCache
                     {
                         $MACAddress = $split.ToUpper()
                     }
-                    elseif(-not([String]::IsNullOrEmpty($split)))
+                    elseif (-not([String]::IsNullOrEmpty($split)))
                     {
                         $Type = $split
                     }
                 }
 
                 [pscustomobject] @{
-                    Interface = $InterfaceIPv4
+                    Interface   = $InterfaceIPv4
                     IPv4Address = $IPv4Address
-                    MACAddress = $MACAddress
-                    Type = $Type
+                    MACAddress  = $MACAddress
+                    Type        = $Type
                 }
             }
         }
     }
 
-    End{
+    End
+    {
 
     }
 }

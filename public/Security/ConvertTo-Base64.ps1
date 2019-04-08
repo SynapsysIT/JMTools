@@ -1,9 +1,8 @@
 ###############################################################################################################
 # Language     :  PowerShell 4.0
 # Filename     :  ConvertTo-Base64.ps1
-# Autor        :  BornToBeRoot (https://github.com/BornToBeRoot)
-# Description  :  Convert a text (command) to an Base64 encoded string
-# Repository   :  https://github.com/BornToBeRoot/PowerShell
+# Autor        :  Julien Mazoyer
+# Description  :  Convert a text or command to an Base64 encoded string
 ###############################################################################################################
 
 <#
@@ -30,9 +29,7 @@
     -a----        8/20/2016  12:08 AM             14 File_03.txt
     -a----        6/24/2016   5:01 PM            120 File_04.zip
     -a----        8/20/2016  12:54 AM             14 File_05.txt       
-    
-    .LINK
-    https://github.com/BornToBeRoot/PowerShell/blob/master/Documentation/Function/ConvertTo-Base64.README.md
+
 #>
 
 function ConvertTo-Base64

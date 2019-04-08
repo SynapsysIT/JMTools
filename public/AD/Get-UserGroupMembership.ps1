@@ -4,9 +4,8 @@
 # Autor        :  Julien Mazoyer
 # Description  :  Get AD User Group Membership
 ###############################################################################################################
-function Get-UserGroupMembership
-{
-    <#
+
+<#
     .SYNOPSIS
     Get AD User Group Membership
 
@@ -16,32 +15,39 @@ function Get-UserGroupMembership
     .EXAMPLE
     PS C:\> Get-UserGroupMembership "UserSamAccountName"
 #>
-    Param (
-    [Parameter(Mandatory=$true,ValueFromPipeLine=$true)]
-    [Alias("ID","Users","Name")]
-    [string[]]$User
-)
-Begin {
-    Try { Import-Module ActiveDirectory -ErrorAction Stop }
-    Catch { Write-Host "Unable to load Active Directory module, is RSAT installed?"; Break }
-}
+function Get-UserGroupMembership
+{
 
-Process {
-    ForEach ($U in $User)
-    {   $UN = Get-ADUser $U -Properties MemberOf
-        $Groups = ForEach ($Group in ($UN.MemberOf))
-        {   (Get-ADGroup $Group)
-        }
-        $Groups = $Groups | Sort
-        ForEach ($Group in $Groups)
-        {        
-           [PSCustomObject]@{
-               Group = $Group.Name
-               DistinguishedName = $Group.DistinguishedName
-               GroupCategory = $Group.GroupCategory
-               GroupScope = $Group.GroupScope
-           }  
+    Param (
+        [Parameter(Mandatory = $true, ValueFromPipeLine = $true)]
+        [Alias("ID", "Users", "Name")]
+        [string[]]$User
+    )
+    Begin
+    {
+        Try { Import-Module ActiveDirectory -ErrorAction Stop }
+        Catch { Write-Host "Unable to load Active Directory module, is RSAT installed?"; Break }
+    }
+
+    Process
+    {
+        ForEach ($U in $User)
+        {
+            $UN = Get-ADUser $U -Properties MemberOf
+            $Groups = ForEach ($Group in ($UN.MemberOf))
+            {
+                (Get-ADGroup $Group)
+            }
+            $Groups = $Groups | Sort-Object
+            ForEach ($Group in $Groups)
+            {        
+                [PSCustomObject]@{
+                    Group             = $Group.Name
+                    DistinguishedName = $Group.DistinguishedName
+                    GroupCategory     = $Group.GroupCategory
+                    GroupScope        = $Group.GroupScope
+                }  
+            }
         }
     }
-}
 }

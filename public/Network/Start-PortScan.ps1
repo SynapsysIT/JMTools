@@ -5,9 +5,6 @@
 # Description  :  Start a port scan on the selected computer.
 ###############################################################################################################
 
-function Start-PortScan
-{
-	
 <#
     .SYNOPSIS
     Start a port scan on the selected computer.
@@ -36,6 +33,10 @@ function Start-PortScan
 
 	...
 #>
+function Start-PortScan
+{
+	
+
 	[CmdletBinding()]
 	[OutputType([System.Management.Automation.PSCustomObject[]])]
 	Param(

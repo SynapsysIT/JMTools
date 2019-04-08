@@ -4,7 +4,7 @@
 # Autor        :  Julien Mazoyer
 # Description  :  Start a port scan on the selected computer.
 ###############################################################################################################
-function Test-Port {
+
 <#
       .SYNOPSIS
       Test-Port is an advanced Powershell function. Test-OpenPort acts like a port scanner.
@@ -14,7 +14,10 @@ function Test-Port {
   
       .EXAMPLE
       Test-Port -Target google.com -Port 80,443
-    #>     
+#>  
+function Test-Port
+{
+   
     [CmdletBinding()]
   
     param

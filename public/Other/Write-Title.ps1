@@ -1,4 +1,26 @@
-﻿function Write-Title
+﻿###############################################################################################################
+# Language     :  PowerShell 4.0
+# Filename     :  Write-Title.ps1
+# Autor        :  Julien Mazoyer
+# Description  :  Show a Title bar in Console
+###############################################################################################################
+
+<#
+    .SYNOPSIS
+    Show a Title bar in Console
+
+    .DESCRIPTION
+    Show a Title bar in Console
+
+    .EXAMPLE
+
+    Write-Title -Message "Script de création d'utilisateur" -Upper -Color Red
+
+    ┌────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+    │                                                      SCRIPT DE CRÉATION D'UTILISATEUR                                                      │
+    └────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+ #>
+function Write-Title
 { 
     param($Message,$Color = "White",[switch]$Upper) 
 

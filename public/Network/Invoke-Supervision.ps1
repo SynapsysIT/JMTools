@@ -5,8 +5,6 @@
 # Description  :  Show a graphical table with ping status of multiple hosts
 ###############################################################################################################
 
-Function Invoke-Supervision
-{
 <#
     .SYNOPSIS
     Show a graphical table with ping status of multiple hosts
@@ -23,6 +21,9 @@ Function Invoke-Supervision
 
 
 #>
+Function Invoke-Supervision
+{
+
     #Parameter Definition
     Param
     (

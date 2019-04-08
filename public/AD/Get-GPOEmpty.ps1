@@ -5,9 +5,7 @@
 # Description  :  Get Empty GPO
 ###############################################################################################################
 
-function Get-GPOEmpty
-{
-    <#
+<#
     .SYNOPSIS
     Get Empty GPO
 
@@ -16,7 +14,10 @@ function Get-GPOEmpty
 
     .EXAMPLE
     PS C:\>Get-GPOEmpty GPO
-    #>
+#>
+function Get-GPOEmpty
+{
+
     [cmdletbinding()]
     param (
     )

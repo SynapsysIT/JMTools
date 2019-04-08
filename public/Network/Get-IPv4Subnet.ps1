@@ -1,7 +1,5 @@
 
-function Convert-IPv4Address
-{
-    <#
+<#
     .SYNOPSIS
     Calculate a subnet based on an IP-Address and the subnetmask or CIDR
 
@@ -28,110 +26,122 @@ function Convert-IPv4Address
     .LINK
     https://github.com/BornToBeRoot/PowerShell/blob/master/Documentation/Function/Get-IPv4Subnet.README.md
 #>
-    [CmdletBinding(DefaultParameterSetName='IPv4Address')]
+function Convert-IPv4Address
+{
+
+    [CmdletBinding(DefaultParameterSetName = 'IPv4Address')]
     param(
         [Parameter(
-            ParameterSetName='IPv4Address',
-            Position=0,
-            Mandatory=$true,
-            HelpMessage='IPv4-Address as string like "192.168.1.1"')]
+            ParameterSetName = 'IPv4Address',
+            Position = 0,
+            Mandatory = $true,
+            HelpMessage = 'IPv4-Address as string like "192.168.1.1"')]
         [IPAddress]$IPv4Address,
 
         [Parameter(
-                ParameterSetName='Int64',
-                Position=0,
-                Mandatory=$true,
-                HelpMessage='IPv4-Address as Int64 like 2886755428')]
+            ParameterSetName = 'Int64',
+            Position = 0,
+            Mandatory = $true,
+            HelpMessage = 'IPv4-Address as Int64 like 2886755428')]
         [long]$Int64
     )
 
-    Begin {
+    Begin
+    {
 
     }
 
-    Process {
-        switch($PSCmdlet.ParameterSetName)
+    Process
+    {
+        switch ($PSCmdlet.ParameterSetName)
         {
             # Convert IPv4-Address as string into Int64
-            "IPv4Address" {
+            "IPv4Address"
+            {
                 $Octets = $IPv4Address.ToString().Split(".")
-                $Int64 = [long]([long]$Octets[0]*16777216 + [long]$Octets[1]*65536 + [long]$Octets[2]*256 + [long]$Octets[3])
+                $Int64 = [long]([long]$Octets[0] * 16777216 + [long]$Octets[1] * 65536 + [long]$Octets[2] * 256 + [long]$Octets[3])
             }
 
             # Convert IPv4-Address as Int64 into string
-            "Int64" {
-                $IPv4Address = (([System.Math]::Truncate($Int64/16777216)).ToString() + "." + ([System.Math]::Truncate(($Int64%16777216)/65536)).ToString() + "." + ([System.Math]::Truncate(($Int64%65536)/256)).ToString() + "." + ([System.Math]::Truncate($Int64%256)).ToString())
+            "Int64"
+            {
+                $IPv4Address = (([System.Math]::Truncate($Int64 / 16777216)).ToString() + "." + ([System.Math]::Truncate(($Int64 % 16777216) / 65536)).ToString() + "." + ([System.Math]::Truncate(($Int64 % 65536) / 256)).ToString() + "." + ([System.Math]::Truncate($Int64 % 256)).ToString())
             }
         }
 
         [pscustomobject] @{
             IPv4Address = $IPv4Address
-            Int64 = $Int64
+            Int64       = $Int64
         }
     }
 
-    End {
+    End
+    {
 
     }
 }
 
 function Get-IPv4Subnet
 {
-    [CmdletBinding(DefaultParameterSetName='CIDR')]
+    [CmdletBinding(DefaultParameterSetName = 'CIDR')]
     param(
         [Parameter(
-            Position=0,
-            Mandatory=$true,
-            HelpMessage='IPv4-Address which is in the subnet')]
+            Position = 0,
+            Mandatory = $true,
+            HelpMessage = 'IPv4-Address which is in the subnet')]
         [IPAddress]$IPv4Address,
 
         [Parameter(
-            ParameterSetName='CIDR',
-            Position=1,
-            Mandatory=$true,
-            HelpMessage='CIDR like /24 without "/"')]
-        [ValidateRange(0,31)]
+            ParameterSetName = 'CIDR',
+            Position = 1,
+            Mandatory = $true,
+            HelpMessage = 'CIDR like /24 without "/"')]
+        [ValidateRange(0, 31)]
         [Int32]$CIDR,
 
         [Parameter(
-            ParameterSetName='Mask',
-            Position=1,
-            Mandatory=$true,
-            Helpmessage='Subnetmask like 255.255.255.0')]
-        [ValidateScript({
-            if($_ -match "^(254|252|248|240|224|192|128).0.0.0$|^255.(254|252|248|240|224|192|128|0).0.0$|^255.255.(254|252|248|240|224|192|128|0).0$|^255.255.255.(254|252|248|240|224|192|128|0)$")
-            {
-                return $true
-            }
-            else
-            {
-                throw "Enter a valid subnetmask (like 255.255.255.0)!"
-            }
-        })]
+            ParameterSetName = 'Mask',
+            Position = 1,
+            Mandatory = $true,
+            Helpmessage = 'Subnetmask like 255.255.255.0')]
+        [ValidateScript( {
+                if ($_ -match "^(254|252|248|240|224|192|128).0.0.0$|^255.(254|252|248|240|224|192|128|0).0.0$|^255.255.(254|252|248|240|224|192|128|0).0$|^255.255.255.(254|252|248|240|224|192|128|0)$")
+                {
+                    return $true
+                }
+                else
+                {
+                    throw "Enter a valid subnetmask (like 255.255.255.0)!"
+                }
+            })]
         [String]$Mask
     )
 
-    Begin{
+    Begin
+    {
 
 
 
     }
 
-    Process{
+    Process
+    {
         # Convert Mask or CIDR - because we need both in the code below
-        switch($PSCmdlet.ParameterSetName)
+        switch ($PSCmdlet.ParameterSetName)
         {
-            "CIDR" {
+            "CIDR"
+            {
                 $Mask = (Convert-Subnetmask -CIDR $CIDR).Mask
             }
 
-            "Mask" {
+            "Mask"
+            {
                 $CIDR = (Convert-Subnetmask -Mask $Mask).CIDR
             }
         }
 
         # Get CIDR Address by parsing it into an IP-Address
-        $CIDRAddress = [System.Net.IPAddress]::Parse([System.Convert]::ToUInt64(("1"* $CIDR).PadRight(32, "0"), 2))
+        $CIDRAddress = [System.Net.IPAddress]::Parse([System.Convert]::ToUInt64(("1" * $CIDR).PadRight(32, "0"), 2))
 
         # Binary AND ... this is how subnets work.
         $NetworkID_bAND = $IPv4Address.Address -band $CIDRAddress.Address
@@ -143,7 +153,7 @@ function Get-IPv4Subnet
         $HostBits = ('1' * (32 - $CIDR)).PadLeft(32, "0")
 
         # Convert Bits to Int64
-        $AvailableIPs = [Convert]::ToInt64($HostBits,2)
+        $AvailableIPs = [Convert]::ToInt64($HostBits, 2)
 
         # Convert Network Address to Int64
         $NetworkID_Int64 = (Convert-IPv4Address -IPv4Address $NetworkID.ToString()).Int64
@@ -166,19 +176,19 @@ function Get-IPv4Subnet
         # Build custom PSObject
         $Result = [pscustomobject] @{
             NetworkID = $NetworkID
-            FirstIP = $FirstIP
-            LastIP = $LastIP
+            FirstIP   = $FirstIP
+            LastIP    = $LastIP
             Broadcast = $Broadcast
-            IPs = $AvailableIPs
-            Hosts = $Hosts
+            IPs       = $AvailableIPs
+            Hosts     = $Hosts
         }
 
         # Set the default properties
-        $Result.PSObject.TypeNames.Insert(0,'Subnet.Information')
+        $Result.PSObject.TypeNames.Insert(0, 'Subnet.Information')
 
         $DefaultDisplaySet = 'NetworkID', 'Broadcast', 'IPs', 'Hosts'
 
-        $DefaultDisplayPropertySet = New-Object System.Management.Automation.PSPropertySet('DefaultDisplayPropertySet',[string[]]$DefaultDisplaySet)
+        $DefaultDisplayPropertySet = New-Object System.Management.Automation.PSPropertySet('DefaultDisplayPropertySet', [string[]]$DefaultDisplaySet)
 
         $PSStandardMembers = [System.Management.Automation.PSMemberInfo[]]@($DefaultDisplayPropertySet)
 
@@ -188,7 +198,8 @@ function Get-IPv4Subnet
         $Result
     }
 
-    End{
+    End
+    {
 
     }
 }

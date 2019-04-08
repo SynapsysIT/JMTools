@@ -1,12 +1,10 @@
 ###############################################################################################################
 # Language     :  PowerShell 4.0
 # Filename     :  ConvertFrom-Base64.ps1
-# Autor        :  BornToBeRoot (https://github.com/BornToBeRoot)
+# Autor        :  Julien Mazoyer
 # Description  :  Convert a Base64 encoded string to a plain text string
-# Repository   :  https://github.com/BornToBeRoot/PowerShell
 ###############################################################################################################
-function ConvertFrom-Base64
-{
+
 <#
     .SYNOPSIS
     Convert a Base64 encoded string to a plain text string
@@ -15,13 +13,14 @@ function ConvertFrom-Base64
     Convert a Base64 encoded string to a plain text string.
 
     .EXAMPLE
-    ConvertFrom-Base64 -Text "UwBlAHQALQBMAG8AYwBhAHQAaQBvAG4AIAAtAFAAYQB0AGgAIAAiAEUAOgBcAFQAZQBtAHAAXABGAGkAbABlAHMAXAAiADsARwBlAHQALQBDAGgAaQBsAGQASQB0AGUAbQA="
+    ConvertFrom-Base64 "UwB1AHAAZQByACAAQwBoAGEAaQBuAGUAIAB0AG8AcAAgAHMAZQBjAHIAZQB0AA=="
 
-    Set-Location -Path "E:\Temp\Files\";Get-ChildItem
-    
-    .LINK
-    https://github.com/BornToBeRoot/PowerShell/blob/master/Documentation/Function/ConvertFrom-Base64.README.md
+    Super Chaine top secret
+
 #>
+function ConvertFrom-Base64
+{
+
     [CmdletBinding()]
     param(
         [Parameter(

@@ -1,5 +1,17 @@
+###############################################################################################################
+# Language     :  PowerShell 5.0
+# Filename     :  Invoke-Sudo.ps1
+# Autor        :  Julien Mazoyer
+# Description  :  
+###############################################################################################################
+
+<#
+    .SYNOPSIS
+    Open Elevated Powershell Console
+#>
 Function Invoke-Sudo
 {
+
     [Alias("sudo")]
     param()
     If ($null -eq $args[0])

@@ -1,4 +1,27 @@
-﻿function Write-LineProgress {
+﻿###############################################################################################################
+# Language     :  PowerShell 4.0
+# Filename     :  rite-LineProgress.ps1
+# Autor        :  Julien Mazoyer
+# Description  :  Write Progress Bar in console
+###############################################################################################################
+
+<#    
+        .SYNOPSIS
+            Write Progress Bar in console
+        
+        .DESCRIPTION
+            Write Progress Bar in console
+
+        .EXAMPLE
+            PS C:\> for ($i = 0; $i -lt 100; $i++) {
+                    Start-Sleep 1
+                    Write-LineProgress -Activity "Test" -Progress $i
+                    }
+
+           Test [■■■■■■■■■■■----------------------------------------------------------------] 15%         
+#>
+function Write-LineProgress {
+
     [CmdletBinding()]
     param (
 
@@ -40,5 +63,4 @@
         [console]::CursorVisible = $true
     }
 }
-
 

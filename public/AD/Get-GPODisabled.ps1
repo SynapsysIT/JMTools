@@ -5,7 +5,6 @@
 # Description  :  Get-GPODisabled
 ###############################################################################################################
 
-function Get-GPODisabled {
 <#
     .SYNOPSIS
     Get GPO which are disabled
@@ -16,6 +15,8 @@ function Get-GPODisabled {
     .EXAMPLE
     PS C:\> Get-GPODisabled
 #>
+function Get-GPODisabled {
+
     [cmdletbinding()]
     param (
     )

@@ -1,8 +1,16 @@
-﻿Function Get-Who {
-    <#
+﻿###############################################################################################################
+# Language     :  PowerShell 5.0
+# Filename     :  Copy-Who.ps1
+# Autor        :  Julien Mazoyer
+# Description  :  Get PowerShell session information
+###############################################################################################################
+
+<#
     .SYNOPSIS
-    Get PowerShell user summary information
-    #>
+    Get PowerShell session information
+#>
+Function Get-Who {
+
       [CmdletBinding()]
       Param(
         [switch]$AsString

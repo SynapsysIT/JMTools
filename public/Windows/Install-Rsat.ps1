@@ -1,5 +1,11 @@
-﻿function Install-Rsat {
-  <#
+﻿###############################################################################################################
+# Language     :  PowerShell 4.0
+# Filename     :  Install-Rsat.ps1
+# Autor        :  Julien Mazoyer
+# Description  :  Downloads and installs RSAT
+###############################################################################################################
+
+<#
       .SYNOPSIS
       Downloads and installs RSAT (Windows Remote Server Admin tools).
 
@@ -9,7 +15,9 @@
 
       .EXAMPLE
       Install-Rsat
-  #>
+#>
+function Install-Rsat {
+
 
   [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingWMICmdlet', '')]
   [CmdletBinding(ConfirmImpact = 'Medium')]

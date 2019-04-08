@@ -1,5 +1,11 @@
-function New-Password {
-    <#
+###############################################################################################################
+# Language     :  PowerShell 4.0
+# Filename     :  New-Password.ps1
+# Autor        :  Julien Mazoyer
+# Description  :  Function to generate random password
+###############################################################################################################
+
+<#
      .SYNOPSIS
       Function to generate random password
 
@@ -7,35 +13,29 @@ function New-Password {
       Function to generate random password
 
      .PARAMETER Length
-      Number between 2 and 200
-      Default is 12
+      Number between 2 and 100
+      Default 12
 
      .PARAMETER Include
-      One or more of the following:
         UpperCase
         LowerCase
         Numbers
         SpecialCharacters
-      Default is all 4
+        Default is all 
 
      .EXAMPLE
       Generate-Password
 
      .EXAMPLE
-      Generate-Password -Length 10 -Include LowerCase,UpperCase,Numbers -Verbose
+      Generate-Password -Length 10 -Include LowerCase,UpperCase,Numbers
 
-     .LINK
-      https://superwidgets.wordpress.com/category/powershell/
+#>
+function New-Password {
 
-     .NOTES
-      Function by Sam Boutros
-      v0.1 - 27 July 2017
-
-    #>
 
         [CmdletBinding(SupportsShouldProcess=$true,ConfirmImpact='Low')]
         Param(
-            [Parameter(Mandatory=$false,Position=0)][ValidateRange(2,200)][Int32]$Length = 12,
+            [Parameter(Mandatory=$false,Position=0)][ValidateRange(2,100)][Int32]$Length = 12,
             [Parameter(Mandatory=$false,Position=1)][ValidateSet('UpperCase','LowerCase','Numbers','SpecialCharacters')]
                 [String[]]$Include = @('UpperCase','LowerCase','Numbers','SpecialCharacters')
         )

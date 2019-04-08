@@ -1,9 +1,8 @@
 ###############################################################################################################
 # Language     :  PowerShell 4.0
 # Filename     :  Get-InstalledSoftware.ps1
-# Autor        :  BornToBeRoot (https://github.com/BornToBeRoot)
+# Autor        :  Julien Mazoyer
 # Description  :  Get all installed software with DisplayName, Publisher and UninstallString
-# Repository   :  https://github.com/BornToBeRoot/PowerShell
 ###############################################################################################################
 
 <#
@@ -11,7 +10,7 @@
     Get all installed software with DisplayName, Publisher and UninstallString
                  
     .DESCRIPTION         
-    Get all installed software with DisplayName, Publisher and UninstallString from a local or remote computer. The result will also include the InstallLocation and the InstallDate. To reduce the results, you can use the parameter "-Search *PRODUCTNAME*".
+    Get all installed software with DisplayName, Publisher and UninstallString from a local or remote computer. (Remote Powershell must be enabled)
                                  
     .EXAMPLE
     Get-InstalledSoftware
@@ -26,16 +25,13 @@
 	InstallDate     : 20160506
 
     .EXAMPLE
-    Get-InstalledSoftware -Search "*firefox*" -ComputerName TEST-PC-01  
+    Get-InstalledSoftware -Search "*firefox*" -ComputerName PC01  
 	
     DisplayName     : Mozilla Firefox 47.0.1 (x86 de)
     Publisher       : Mozilla
     UninstallString : "C:\Program Files (x86)\Mozilla Firefox\uninstall\helper.exe"
     InstallLocation : C:\Program Files (x86)\Mozilla Firefox
     InstallDate     :
-
-    .LINK
-    https://github.com/BornToBeRoot/PowerShell/blob/master/Documentation/Function/Get-InstalledSoftware.README.md
 #>
 
 function Get-InstalledSoftware

@@ -5,9 +5,7 @@
 # Description  :  Get GPO where "Authentificated Users" & "Domain Computers" have no permissions. These GPO are not applied to any Users / Computers.
 ###############################################################################################################
 
-function Get-GPOMissingPermissions
-{
-    <#
+<#
     .SYNOPSIS
     Get-GPO Missing Permissions
 
@@ -17,6 +15,9 @@ function Get-GPOMissingPermissions
     .EXAMPLE
     PS C:\>Get-GPOMissingPermissions
 #>
+function Get-GPOMissingPermissions
+{
+
     [cmdletbinding()]
     param ()
     try

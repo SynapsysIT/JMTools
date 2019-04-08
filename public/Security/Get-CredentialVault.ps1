@@ -1,3 +1,21 @@
+###############################################################################################################
+# Language     :  PowerShell 4.0
+# Filename     :  Get-CredentialVault.ps1
+# Autor        :  Julien Mazoyer
+# Description  :  Retrieve credential from Windows Vault
+###############################################################################################################
+
+<#
+     .SYNOPSIS
+      Retrieve credential from Windows Vault
+
+     .DESCRIPTION
+      Retrieve credential from Windows Vault
+
+     .EXAMPLE
+      $Credentials = Get-CredentialVault -Username jmazoyer
+
+#>
 function Get-CredentialVault
 {
     [CmdletBinding()]
@@ -24,12 +42,6 @@ function Get-CredentialVault
     {
         return $AllSavedCredentials
     }
-
-
-
-
-
-
 }
 
 
